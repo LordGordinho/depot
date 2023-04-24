@@ -23,6 +23,10 @@
           <li><%= link_to 'news', '/news' %></li>
           <li><%= link_to 'Contact', '/contant' %></li>
         </ul>
+
+        <span class="datetime-now">
+          <%= DateTime.now.strftime('%y-%m-%d %M:%H') %>
+        </span>
       </nav>
       <main class='<%= controller.controller_name %>' >
         <%= yield %>

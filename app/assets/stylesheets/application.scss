@@ -53,6 +53,14 @@ header.main {
     padding-bottom: 1em;
     background: #141;
     text-align: center;  // mobile has centered nav
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    .datetime-now {
+      font-weight: bold;
+      color: aliceblue;
+    }
     @media (min-width: 30em) {
       text-align: left; // desktop nav is left-aligned
       padding: 1em;     // and needs more padding
