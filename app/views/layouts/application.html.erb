@@ -18,15 +18,21 @@
     <section class="content">
       <nav class="side_nav">
         <ul>
-          <li><%= link_to 'Home', '/home' %></li>
+          <li><%= link_to 'Home', '/' %></li>
           <li><%= link_to 'Questions', '/questions' %></li>
           <li><%= link_to 'news', '/news' %></li>
           <li><%= link_to 'Contact', '/contant' %></li>
         </ul>
 
-        <span class="datetime-now">
-          <%= DateTime.now.strftime('%y-%m-%d %M:%H') %>
-        </span>
+        <div>
+          <span class="datetime-now">
+            <%= DateTime.now.strftime('%y-%m-%d %H:%M') %>
+          </span>
+
+          <span class="datetime-now">
+            session-id: <%= session[:counter] %>
+          </span>
+        </div>
       </nav>
       <main class='<%= controller.controller_name %>' >
         <%= yield %>

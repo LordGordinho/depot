@@ -1,6 +1,7 @@
-<% if %>
+<% if notice %>
   <aside id="notice"><%= notice %></aside>
 <% end %>
+
 <h1>Your Pragmatic Catalog</h1>
 <ul>
   <% cache @products do %>
@@ -14,6 +15,7 @@
           </p>
           <div class="price">
             <%= number_to_currency(product.price, unit: "R$ ", separator: ",", delimiter: ".") %>
+            <%= button_to 'Add to Card', line_items_path(product_id: product) %>
           </div>
         </li>
       <% end %>
