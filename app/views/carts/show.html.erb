@@ -3,8 +3,19 @@
 <% end %>
 
 <h2>Your Pragmatic Cart</h2>
-<ul>
-  <% @cart.line_items.each do |item| %>
-    <li><%= item.quantity %> &times; <%= item.product.title %></li>
+<table>
+  <% @cart.line_items.each do |line_item| %>
+    <tr>
+      <td class="quantity"><%= line_item.quantity %></td>
+      <td><%= line_item.product.title %></td>
+      <td class="price"><%= number_to_currency(line_item.total_price) %></td>
+      <td><%= button_to "Delete", line_item_path(line_item), method: :delete %></td>
+    </tr>
   <% end %>
-</ul>
+  <tfoot>
+    <td colsapan="2">Total: </td>
+    <td><%= number_to_currency(@cart.total_price) %></td>
+  </tfoot>
+</table>
+
+<%= button_to 'Empty cart', cart_path(@cart), method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -7,6 +7,7 @@ class CartsController < ApplicationController
   end
 
   def show
+    return redirect_to store_index_path, notice: 'Cart was not found.' unless @cart.id == session[:cart_id]
   end
 
   def new
@@ -43,10 +44,14 @@ class CartsController < ApplicationController
   end
 
   def destroy
+    return redirect_to carts_url, notice: 'Cart not found.' unless session[:cart_id]
+    return redirect_to carts_url, notice: 'Cart was not successfully empty.' unless @cart.id == session[:cart_id]
+
     @cart.destroy
+    session[:cart_id] = nil
 
     respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
+      format.html { redirect_to store_index_url, notice: 'Cart was successfully empty.' }
       format.json { head :no_content }
     end
   end
