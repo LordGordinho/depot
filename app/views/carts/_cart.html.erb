@@ -1,0 +1,22 @@
+<article>
+  <% if notice %>
+    <aside id="notice"><%= notice %></aside>
+  <% end %>
+    <h2>Your Pragmatic Cart</h2>
+  <% unless @cart.line_items.empty? %>
+    <table>
+      <tr>
+        <%= render @cart.line_items %>
+      </tr>
+      <%# @cart.line_items.each do |line_item| %>
+        <%# render line_item%>
+      <%# end %>
+      <tfoot>
+        <td colsapan="2">Total: </td>
+        <td><%= number_to_currency(@cart.total_price) %></td>
+      </tfoot>
+    </table>
+
+    <%= button_to 'Empty cart', cart_path(@cart), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</article>

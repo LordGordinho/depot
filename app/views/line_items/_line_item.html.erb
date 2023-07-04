@@ -1,0 +1,7 @@
+<tr class=<%= @line_item == line_item ? 'line-item-highlight' : '' %>>
+  <td><%= button_to "+", line_items_path(product_id: line_item.product.id) %></td>
+  <td class="quantity"><%= line_item.quantity %></td>
+  <td><%= line_item.product.title %></td>
+  <td class="price"><%= number_to_currency(line_item.total_price) %></td>
+  <td><%= button_to "Delete", line_item_path(line_item), method: :delete %></td>
+</tr>
