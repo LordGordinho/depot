@@ -13,6 +13,18 @@ class Cart < ApplicationRecord
     current_item
   end
 
+  def remove_product(product)
+    current_item = line_items.find_by(product_id: product.id)
+
+    if current_item.quantity == 1
+      current_item.destroy
+    else
+      current_item.quantity -= 1
+    end
+
+    current_item
+  end
+
   def adding_total_price
     update_column(:total_price, line_items.sum(&:total_price))
   end
