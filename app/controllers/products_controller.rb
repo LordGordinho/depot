@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
         format.json { render :show, status: :created, location: @product }
 
         @products = Product.all.order(:title)
-        ActionCable.server.broadcast('products', { html: render_to_string('stores/index', layout: false) })
+        ActionCable.server.broadcast('products', { product_id: @product.id, html: render_to_string('stores/index', layout: false) })
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
         format.json { render :show, status: :ok, location: @product }
 
         @products = Product.all.order(:title)
-        ActionCable.server.broadcast('products', { html: render_to_string('stores/index', layout: false) })
+        ActionCable.server.broadcast('products', { product_id: @product.id, html: render_to_string('stores/index', layout: false) })
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }

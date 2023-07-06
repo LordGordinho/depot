@@ -17,6 +17,6 @@
       </tfoot>
     </table>
 
-    <%= button_to 'Empty cart', cart_path(@cart), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= button_to 'Empty cart', cart_path(@cart), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
   <% end %>
 </article>

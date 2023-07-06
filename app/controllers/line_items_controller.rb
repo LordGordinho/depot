@@ -36,7 +36,10 @@ class LineItemsController < ApplicationController
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
+        @cart = Cart.find_or_create_by(id: session[:cart_id])
+
         format.html { redirect_to store_index_url }
+        format.js {}
         format.json { render :show, status: :ok, location: @line_item }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,11 +49,13 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
-    cart = @line_item.cart
     @line_item.destroy
 
     respond_to do |format|
+      @cart = Cart.find_or_create_by(id: session[:cart_id])
+
       format.html { redirect_to cart_url(cart), notice: "Line item was successfully destroyed." }
+      format.js {}
       format.json { head :no_content }
     end
   end

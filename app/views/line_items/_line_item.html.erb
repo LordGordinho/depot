@@ -1,8 +1,8 @@
 <tr class=<%= @line_item == line_item ? 'line-item-highlight' : '' %>>
-  <td><%= button_to "-", line_item_path(line_item), params: { line_item: { quantity: (line_item.quantity - 1) }}, method: :patch %></td>
+  <td><%= button_to "-", line_item_path(line_item), params: { line_item: { quantity: (line_item.quantity - 1) }}, method: :patch, remote: true %></td>
   <td class="quantity"><%= line_item.quantity %></td>
-  <td><%= button_to "+", line_item_path(line_item), params: { line_item: { quantity: (line_item.quantity + 1) }}, method: :patch %></td>
+  <td><%= button_to "+", line_item_path(line_item), params: { line_item: { quantity: (line_item.quantity + 1) }}, method: :patch, remote: true %></td>
   <td><%= line_item.product.title %></td>
   <td class="price"><%= number_to_currency(line_item.total_price) %></td>
-  <td><%= button_to "Delete", line_item_path(line_item), method: :delete %></td>
+  <td><%= button_to "Delete", line_item_path(line_item), method: :delete, remote: true %></td>
 </tr>
