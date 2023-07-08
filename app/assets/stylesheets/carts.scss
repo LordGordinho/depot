@@ -11,6 +11,7 @@
   }
   td.quantity {
     white-space: nowrap;
+    text-align: center;
   }
   td.quantity::after {
     font-weight: bold;
@@ -43,5 +44,9 @@
   }
   input[type="submit"]:hover {
     background-color: #992;
+  }
+  .actions {
+    display: flex;
+    justify-content: space-evenly;
   }
 }

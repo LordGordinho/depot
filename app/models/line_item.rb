@@ -1,6 +1,7 @@
 class LineItem < ApplicationRecord
   belongs_to :product
-  belongs_to :cart
+  belongs_to :cart, optional: true
+  belongs_to :order, optional: true
 
   before_commit :destroy_line_item, only: [:update]
   after_commit :adding_total_price, only: [:update, :create]
