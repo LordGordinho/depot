@@ -1,0 +1,22 @@
+
+<div class="feed">
+  <% @product.orders.each do |order| %>
+    <h1>Order <%= order.id %></h1>
+    <table>
+      <thead>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </thead>
+      <tbody>
+        <% order.line_items.each do |line_item| %>
+          <tr>
+            <td><%= line_item.product.title %></td>
+            <td><%= line_item.quantity %></td>
+            <td><%= line_item.total_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

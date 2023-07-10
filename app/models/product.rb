@@ -3,6 +3,7 @@
 # Model Product
 class Product < ApplicationRecord
   has_many :line_items, dependent: :destroy
+  has_many :orders, through: :line_items
 
   validates :title, :description, :price, :image_url, presence: true
   validates :title, uniqueness: true
