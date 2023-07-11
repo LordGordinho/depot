@@ -1,14 +1,8 @@
 class Order < ApplicationRecord
-  enum pay_type: {
-    'Check' => 0,
-    'Credit Card' => 1,
-    'Purchase order' => 2
-  }
-
   has_many :line_items, dependent: :destroy
+  belongs_to :pay_type
 
   validates :name, :address, :email, presence: true
-  validates :pay_type, inclusion: pay_types.keys
 
   scope :latest_order, -> { order(:updated_at).last }
 

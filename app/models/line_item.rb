@@ -16,6 +16,8 @@ class LineItem < ApplicationRecord
   end
 
   def remove_total_price
+    return unless cart
+
     cart.adding_total_price
   end
 
