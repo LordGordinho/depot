@@ -26,9 +26,15 @@
     <%= form.text_field :email, size: 40 %>
   </div>
 
-  <div class="field">
-    <%= form.label :pay_type_id %>
-    <%= form.select :pay_type_id, PayType.all.pluck(:name, :id), prompt: 'Select a payment method' %>
+  <div data-controller="pay-type-selector">
+    <label for="order_pay_type">Pay type</label>
+    <select data-action="pay-type-selector#changeDisplayForm" data-pay-type-selector-target="selectPayType" id="order_pay_type" name="order[pay_type_id]">
+      <option value="">Select a payment method</option>
+      <% PayType.all.each do |pay_type| %>
+        <option value="<%= pay_type.id %>"><%= pay_type.name %></option>
+      <% end %>
+    </select>
+    <div data-pay-type-selector-target="customFields"></div>
   </div>
 
   <div class="actions">
