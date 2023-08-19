@@ -6,8 +6,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <%= javascript_importmap_tags %>
   </head>
 
@@ -18,11 +20,7 @@
     </header>
     <section class="content">
       <nav class="side_nav">
-        <% if @cart %>
-          <div class="cart" id="cart">
-            <%= render_if @cart && @cart.line_items.any?, @cart %>
-          </div>
-        <% end %>
+        <%= render partial: 'carts/cart', locals: { cart: @cart } %>
         <ul>
           <li><%= link_to 'Home', '/' %></li>
           <li><%= link_to 'Questions', '/questions' %></li>

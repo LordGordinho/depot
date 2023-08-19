@@ -23,8 +23,8 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
+        format.turbo_stream { @current_line_item = @line_item }
         format.html { redirect_to store_index_url, notice: 'Line item was successfully created.' }
-        format.js {}
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class LineItemsController < ApplicationController
         @cart = Cart.find_or_create_by(id: session[:cart_id])
 
         format.html { redirect_to store_index_url }
-        format.js {}
+        format.turbo_stream { @current_line_item = @line_item }
         format.json { render :show, status: :ok, location: @line_item }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,8 +54,8 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       @cart = Cart.find_or_create_by(id: session[:cart_id])
 
+      format.turbo_stream
       format.html { redirect_to cart_url(cart), notice: "Line item was successfully destroyed." }
-      format.js {}
       format.json { head :no_content }
     end
   end

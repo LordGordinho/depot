@@ -1,25 +1,34 @@
-<article class="carts" >
-  <% if notice %>
-    <aside id="notice"><%= notice %></aside>
-  <% end %>
-    <h2>Your Pragmatic Cart</h2>
-  <% unless @cart.line_items.empty? %>
-    <table>
-      <tr>
-        <%= render @cart.line_items %>
-      </tr>
-      <%# @cart.line_items.each do |line_item| %>
-        <%# render line_item%>
-      <%# end %>
-      <tfoot>
-        <td colsapan="2">Total: </td>
-        <td><%= number_to_currency(@cart.total_price) %></td>
-      </tfoot>
-    </table>
+<% if @cart and not @cart.line_items.empty? %>
+  <div class="cart" id="cart">
+    <article class="carts" id=<%= dom_id @cart %> >
+      <% if notice %>
+        <aside id="notice"><%= notice %></aside>
+      <% end %>
+        <h2>Your Pragmatic Cart</h2>
+      <% unless @cart.line_items.empty? %>
+        <table>
+          <tr>
+            <%= render @cart.line_items %>
+          </tr>
+          <%# @cart.line_items.each do |line_item| %>
+            <%# render line_item %>
+          <%# end %>
+          <%# @cart.line_items.each do |line_item| %>
+            <%# render partial: 'line_items/line_item', locals: { line_item: line_item } %>
+          <%# end %>
+          <tfoot>
+            <td colsapan="2">Total: </td>
+            <td><%= number_to_currency(@cart.total_price) %></td>
+          </tfoot>
+        </table>
 
-    <div class="actions">
-      <%= button_to 'Empty cart', cart_path(@cart), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
-      <%= button_to 'Checkout', new_order_path, method: :get %>
-    </div>
-  <% end %>
-</article>
+        <div class="actions">
+          <%= button_to 'Empty cart', cart_path(@cart), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= button_to 'Checkout', new_order_path, method: :get %>
+        </div>
+      <% end %>
+    </article>
+  </div> 
+<% else %>
+  <div class="cart" id="cart"></div>
+<% end %>

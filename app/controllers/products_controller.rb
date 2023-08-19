@@ -28,8 +28,9 @@ class ProductsController < ApplicationController
         format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
 
-        @products = Product.all.order(:title)
-        ActionCable.server.broadcast('products', { product_id: @product.id, html: render_to_string('stores/index', layout: false) })
+        # @products = Product.all.order(:title)
+        # ActionCable.server.broadcast('products', { product_id: @product.id, html: render_to_string('stores/index', layout: false) })
+        @product.broadcast_replace_later_to 'products', partial: 'store/product_updated'
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
@@ -44,8 +45,9 @@ class ProductsController < ApplicationController
         format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
 
-        @products = Product.all.order(:title)
-        ActionCable.server.broadcast('products', { product_id: @product.id, html: render_to_string('stores/index', layout: false) })
+        # @products = Product.all.order(:title)
+        # ActionCable.server.broadcast('products', { product_id: @product.id, html: render_to_string('stores/index', layout: false) })
+        @product.broadcast_replace_later_to 'products', partial: 'stores/product_updated'
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
